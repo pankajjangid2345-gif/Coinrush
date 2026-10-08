@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CoinRush - Real Ad Rewards Hub</title>
+  
+  <!-- Google Fonts: Inter and JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+
+  <!-- Canvas Confetti Library for Claim Celebrations -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <!-- Pre-load default Ad Network Script tags for high-speed readiness -->
+  <script src="https://pl31592190.profitableratecpmnetwork.com/ac/f3/04/acf304685eafc992248acaecf2dbb823.js" async></script>
+  <script src="https://pl31592189.profitableratecpmnetwork.com/26/17/46/261746c71a026e8995065173962c1247.js" async></script>
+
+  <style>
+    :root {
+      --bg-base: #070b13;
+      --bg-surface: #0e1626;
+      --bg-surface-card: #141f36;
+      --bg-surface-elevated: #1a2846;
+      --border-subtle: #1e2e4f;
+      --border-bright: #3b82f6;
+      --gold-primary: #f59e0b;
+      --gold-glow: rgba(245, 158, 11, 0.35);
+      --emerald: #10b981;
+      --emerald-glow: rgba(16, 185, 129, 0.35);
+      --cyan: #06b6d4;
+      --purple: #a855f7;
+      --rose: #f43f5e;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background: radial-gradient(circle at 50% 0%, #15223f 0%, var(--bg-base) 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    header {
+      background: rgba(7, 11, 19, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
+      position: sticky;
+      top: 0;
+      z-index: 60;
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 72px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .brand-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 20px var(--gold-glow);
+    }
+
+    .brand-title {
+      font-size: 1.35rem;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      background: linear-gradient(90deg, #ffffff, #cbd5e1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-title span {
+      background: linear-gradient(90deg, #f59e0b, #fbbf24);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .status-badge {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 12px;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--emerald);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--emerald);
+      box-shadow: 0 0 10px var(--emerald);
+      animation: statusPulse 2s infinite ease-in-out;
+    }
+
+    @keyframes statusPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    .coin-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      padding: 7px 16px;
+      border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 800;
+      font-size: 1.05rem;
+      color: #fbbf24;
+      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.15);
+      transition: var(--transition);
+    }
+
+    .coin-badge.pulse {
+      transform: scale(1.12);
+      box-shadow: 0 0 25px rgba(245, 158, 11, 0.6);
+    }
+
+    .btn-icon {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-icon:hover {
+      color: #fff;
+      border-color: var(--border-bright);
+      background: var(--bg-surface-elevated);
+    }
+
+    main {
+      flex: 1;
+      padding: 2.25rem 0 4rem;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .stat-card {
+      background: var(--bg-surface-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.35rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .stat-card.accent-gold::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #f59e0b, #ec4899);
+    }
+
+    .stat-card.accent-emerald::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #10b981, #06b6d4);
+    }
+
+    .stat-card.accent-purple::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #8b5cf6, #3b82f6);
+    }
+
+    .stat-card-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-card-value {
+      font-size: 2rem;
+      font-weight: 800;
+      font-family: 'JetBrains Mono', monospace;
+      color: #fff;
+    }
+
+    .goal-progress-track {
+      background: rgba(255, 255, 255, 0.08);
+      height: 7px;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 0.75rem;
+    }
+
+    .goal-progress-fill {
+      background: linear-gradient(90deg, #f59e0b, #10b981);
+      height: 100%;
+      border-radius: 999px;
+      width: 0%;
+      transition: width 0.4s ease;
+    }
+
+    .stat-card-footer {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 0.6rem;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .section-title-wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 900;
+      letter-spacing: -0.4px;
+    }
+
+    .section-desc {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .ads-deck {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2.75rem;
+    }
+
+    .ad-slot-card {
+      background: var(--bg-surface-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      transition: var(--transition);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+      overflow: hidden;
+    }
+
+    .ad-slot-card:hover {
+      border-color: var(--border-bright);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
+    }
+
+    .slot-meta-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+    }
+
+    .slot-pill {
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.6px;
+      padding: 4px 9px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-muted);
+    }
+
+    .reward-tag {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: #fbbf24;
+      background: rgba(245, 158, 11, 0.14);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      padding: 4px 10px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .slot-graphic {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+    }
+
+    .slot-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 0.4rem;
+    }
+
+    .slot-desc {
+      font-size: 0.835rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+      margin-bottom: 1.25rem;
+      min-height: 42px;
+    }
+
+    /* Live 320x50 Banner container inside Slot 3 */
+    .banner-preview-box {
+      width: 100%;
+      min-height: 60px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px dashed var(--border-subtle);
+      border-radius: var(--radius-sm);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+      padding: 5px;
+      overflow: hidden;
+    }
+
+    .banner-preview-label {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .banner-iframe-wrap {
+      width: 320px;
+      max-width: 100%;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .banner-iframe-wrap iframe {
+      border: none;
+      width: 320px;
+      height: 50px;
+    }
+
+    .btn-engage-ad {
+      width: 100%;
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      color: #060b13;
+      border: none;
+      padding: 13px 18px;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      font-weight: 800;
+      letter-spacing: -0.2px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: var(--transition);
+      box-shadow: 0 4px 18px rgba(245, 158, 11, 0.35);
+      position: relative;
+    }
+
+    .btn-engage-ad:hover:not(:disabled) {
+      filter: brightness(1.12);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(245, 158, 11, 0.45);
+    }
+
+    .btn-engage-ad:disabled {
+      background: rgba(255, 255, 255, 0.07);
+      color: #64748b;
+      cursor: not-allowed;
+      box-shadow: none;
+      transform: none;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 8, 15, 0.85);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .modal-backdrop.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-dialog {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 480px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+      transform: scale(0.94);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .modal-backdrop.active .modal-dialog {
+      transform: scale(1);
+    }
+
+    .modal-spinner {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 1.25rem;
+      border: 4px solid rgba(245, 158, 11, 0.15);
+      border-top-color: #f59e0b;
+      border-radius: 50%;
+      animation: spinRing 0.9s infinite linear;
+    }
+
+    @keyframes spinRing {
+      to { transform: rotate(360deg); }
+    }
+
+    .modal-head {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+
+    .modal-sub {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-timer-num {
+      font-size: 3rem;
+      font-weight: 900;
+      font-family: 'JetBrains Mono', monospace;
+      color: #fbbf24;
+      margin-bottom: 1rem;
+    }
+
+    .modal-bar-track {
+      background: rgba(255, 255, 255, 0.08);
+      height: 8px;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-bar-fill {
+      background: linear-gradient(90deg, #f59e0b, #10b981);
+      height: 100%;
+      width: 0%;
+      transition: width 1s linear;
+    }
+
+    .modal-banner-display {
+      margin-bottom: 1.5rem;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid var(--border-subtle);
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .dashboard-lower {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 860px) {
+      .dashboard-lower {
+        grid-template-columns: 1.6fr 1fr;
+      }
+    }
+
+    .feed-card {
+      background: var(--bg-surface-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.35rem;
+    }
+
+    .feed-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 0.85rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      margin-bottom: 1rem;
+    }
+
+    .feed-card-header h3 {
+      font-size: 1rem;
+      font-weight: 800;
+    }
+
+    .activity-ul {
+      list-style: none;
+      max-height: 230px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .activity-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 9px 12px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: 10px;
+      font-size: 0.825rem;
+    }
+
+    .activity-item-time {
+      font-size: 0.725rem;
+      color: var(--text-muted);
+    }
+
+    .activity-item-gain {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--emerald);
+      font-weight: 800;
+    }
+
+    .setting-row {
+      display: flex;
+      justify-content: space-between;
+      color: var(--text-muted);
+      font-size: 0.835rem;
+      padding: 6px 0;
+    }
+
+    .setting-row span:last-child {
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .btn-reset-data {
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-reset-data:hover {
+      border-color: var(--rose);
+      color: var(--rose);
+      background: rgba(244, 63, 94, 0.1);
+    }
+
+    #toast-host {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 999;
+      pointer-events: none;
+    }
+
+    .toast-pill {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      border-left: 4px solid var(--gold-primary);
+      animation: toastIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      pointer-events: auto;
+    }
+
+    .toast-pill.success {
+      border-left-color: var(--emerald);
+    }
+
+    .toast-pill.info {
+      border-left-color: var(--cyan);
+    }
+
+    @keyframes toastIn {
+      from { transform: translateY(15px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container nav-inner">
+      <a href="#" class="brand">
+        <div class="brand-logo">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="#070b13" stroke="#070b13" stroke-width="2">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+          </svg>
+        </div>
+        <div class="brand-title">Coin<span>Rush</span></div>
+      </a>
+
+      <div class="header-actions">
+        <div class="status-badge" title="Ad Networks connected and ready">
+          <span class="status-dot"></span>
+          <span>Networks Ready</span>
+        </div>
+
+        <div class="coin-badge" id="topCoinPill">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#fbbf24">
+            <circle cx="12" cy="12" r="10" stroke="#f59e0b" stroke-width="2"/>
+            <text x="12" y="16" font-size="12" font-weight="bold" fill="#78350f" text-anchor="middle">¢</text>
+          </svg>
+          <span id="displayCoinsTop">0</span>
+        </div>
+
+        <button class="btn-icon" id="btnAudioToggle" title="Toggle Sound FX">
+          <svg id="svgSoundOn" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+          </svg>
+          <svg id="svgSoundOff" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <line x1="23" y1="9" x2="17" y2="15"></line>
+            <line x1="17" y1="9" x2="23" y2="15"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="stats-grid">
+      <!-- Lifetime Total -->
+      <div class="stat-card accent-gold">
+        <div class="stat-card-label">
+          <span>Total Balance</span>
+          <span id="statPerClickRate">+1.00¢ / click</span>
+        </div>
+        <div class="stat-card-value" id="valTotalCoins">0</div>
+        <div class="stat-card-footer">
+          <span>Lifetime Earnings</span>
+          <span id="valTotalClicks">0 Clicks</span>
+        </div>
+      </div>
+
+      <!-- Today's Earnings with Midnight Countdown -->
+      <div class="stat-card accent-emerald">
+        <div class="stat-card-label">
+          <span>Today's Earnings</span>
+          <span>Target: <span id="valTargetGoal">50</span></span>
+        </div>
+        <div class="stat-card-value" id="valTodayCoins">0</div>
+        <div class="goal-progress-track">
+          <div class="goal-progress-fill" id="goalBarFill"></div>
+        </div>
+        <div class="stat-card-footer">
+          <span id="valGoalPercent">0% Achieved</span>
+          <span id="valMidnightCountdown" title="Resets at 00:00 midnight">Resets 00:00</span>
+        </div>
+      </div>
+
+      <!-- Daily Streak -->
+      <div class="stat-card accent-purple">
+        <div class="stat-card-label">
+          <span>Daily Streak</span>
+          <span>Bonus Tier</span>
+        </div>
+        <div class="stat-card-value" id="valStreakDays">1 Day</div>
+        <div class="stat-card-footer">
+          <span>Consecutive Days</span>
+          <span>Active Streak 🔥</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-title-wrap">
+      <div>
+        <h2 class="section-title">4 Real Ad Earning Slots</h2>
+        <p class="section-desc">Click each slot to trigger its live monetization script, view the ad, and claim verified coins.</p>
+      </div>
+    </div>
+
+    <div class="ads-deck" id="adsContainer">
+      <!-- Rendered dynamically via JavaScript for Slots 1, 2, 3, 4 -->
+    </div>
+
+    <div class="dashboard-lower">
+      <div class="feed-card">
+        <div class="feed-card-header">
+          <h3>Earning Activity History</h3>
+          <span style="font-size:0.75rem; color:var(--text-muted);" id="valEventCount">0 events</span>
+        </div>
+        <ul class="activity-ul" id="activityList">
+          <li style="text-align:center; color:var(--text-muted); padding:1.5rem; font-size:0.85rem;">
+            No ad clicks logged yet. Click any of the 4 Ad Slots above to start earning!
+          </li>
+        </ul>
+      </div>
+
+      <div class="feed-card">
+        <div class="feed-card-header">
+          <h3>Ad Network Configuration</h3>
+          <button class="btn-reset-data" id="btnResetStorage">Reset Cache</button>
+        </div>
+        <div class="setting-row">
+          <span>Reward Per View</span>
+          <span id="cfgRewardPerAd">1 Coin</span>
+        </div>
+        <div class="setting-row">
+          <span>Individual Slot Cooldown</span>
+          <span id="cfgCooldownTime">15s</span>
+        </div>
+        <div class="setting-row">
+          <span>Ad 1 & 4 Network</span>
+          <span style="color:#fbbf24;">Profitablerate (04/acf3)</span>
+        </div>
+        <div class="setting-row">
+          <span>Ad 2 Network</span>
+          <span style="color:var(--emerald);">Profitablerate (46/2617)</span>
+        </div>
+        <div class="setting-row">
+          <span>Ad 3 Network</span>
+          <span style="color:var(--cyan);">HighRevenueFormat 320x50</span>
+        </div>
+        <div class="setting-row">
+          <span>Midnight Auto-Reset</span>
+          <span>Enabled (Local 00:00)</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div class="modal-backdrop" id="verifyModal">
+    <div class="modal-dialog">
+      <div class="modal-spinner"></div>
+      <h3 class="modal-head" id="modalAdName">Ad Impression Active</h3>
+      <p class="modal-sub">External monetization offer initiated. Please interact with the creative to complete verification.</p>
+      
+      <div class="modal-banner-display" id="modalBannerHost">
+        <!-- Optional Iframe duplicate injected here during Ad 3 flow -->
+      </div>
+
+      <div class="modal-timer-num" id="modalTimer">5</div>
+      
+      <div class="modal-bar-track">
+        <div class="modal-bar-fill" id="modalBar"></div>
+      </div>
+
+      <button class="btn-engage-ad" id="btnClaimReward" disabled>
+        <span>Verifying Impression...</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast Notification Outlet -->
+  <div id="toast-host"></div>
+
+  <script>
+    /**
+     * =========================================================================
+     * APPLICATION CONFIGURATION & REAL AD CREDENTIALS
+     * =========================================================================
+     */
+    const CONFIG = {
+      COINS_PER_CLICK: 1,             // Reward per completed interaction
+      DAILY_GOAL: 50,                 // Target coins per day
+      VERIFICATION_SECONDS: 5,        // Verification countdown timer (seconds)
+      SLOT_COOLDOWN_SECONDS: 15,      // Cooldown per slot (seconds)
+      STORAGE_KEY: "coinrush_real_ads_state_v4",
+
+      // 4 Distinct Ad Definitions directly bound to user's real ad network scripts
+      AD_SLOTS: [
+        {
+          id: 1,
+          name: "Turbo Ad 1",
+          network: "CPM Network Offer #1",
+          type: "direct_script",
+          scriptSrc: "https://pl31592190.profitableratecpmnetwork.com/ac/f3/04/acf304685eafc992248acaecf2dbb823.js",
+          desc: "Trigger high-CPM sponsor script and claim verified gold reward.",
+          color: "linear-gradient(135deg, #f59e0b, #d97706)",
+          icon: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`
+        },
+        {
+          id: 2,
+          name: "Turbo Ad 2",
+          network: "CPM Network Offer #2",
+          type: "direct_script",
+          scriptSrc: "https://pl31592189.profitableratecpmnetwork.com/26/17/46/261746c71a026e8995065173962c1247.js",
+          desc: "Execute targeted advertiser creative with instant coin verification.",
+          color: "linear-gradient(135deg, #10b981, #059669)",
+          icon: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`
+        },
+        {
+          id: 3,
+          name: "Turbo Ad 3",
+          network: "High Revenue 320x50 Banner",
+          type: "iframe_banner",
+          key: "c9c5a05c0f0c2b56af38934b4887bd1f",
+          invokeSrc: "https://www.highrevenueformat.com/c9c5a05c0f0c2b56af38934b4887bd1f/invoke.js",
+          desc: "Interact with live HighRevenueFormat 320x50 iframe banner.",
+          color: "linear-gradient(135deg, #06b6d4, #0284c7)",
+          icon: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>`
+        },
+        {
+          id: 4,
+          name: "Turbo Ad 4",
+          network: "CPM Network Offer #4",
+          type: "direct_script",
+          scriptSrc: "https://pl31592190.profitableratecpmnetwork.com/ac/f3/04/acf304685eafc992248acaecf2dbb823.js",
+          desc: "Launch monetization partner script and collect top-tier credits.",
+          color: "linear-gradient(135deg, #8b5cf6, #6d28d9)",
+          icon: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`
+        }
+      ]
+    };
+
+    /* App state object persisted to localStorage */
+    let appState = {
+      coins: 0,
+      todayCoins: 0,
+      totalClicks: 0,
+      streak: 1,
+      lastDate: getTodayDateString(),
+      soundEnabled: true,
+      cooldowns: {}, // { slotId: expiryTimestamp }
+      history: []
+    };
+
+    let audioContext = null;
+    let activeSlotInModal = null;
+    let modalTimerInterval = null;
+
+    function playAudio(type) {
+      if (!appState.soundEnabled) return;
+      try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!audioContext && AudioCtx) audioContext = new AudioCtx();
+        if (audioContext && audioContext.state === 'suspended') audioContext.resume();
+        if (!audioContext) return;
+
+        const now = audioContext.currentTime;
+        const osc = audioContext.createOscillator();
+        const gain = audioContext.createGain();
+        gain.connect(audioContext.destination);
+
+        if (type === 'coin') {
+          // Double chime chord
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(987.77, now); // B5
+          osc.frequency.setValueAtTime(1318.51, now + 0.08); // E6
+          gain.gain.setValueAtTime(0.2, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
+          osc.connect(gain);
+          osc.start(now);
+          osc.stop(now + 0.4);
+        } else if (type === 'click') {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(440, now);
+          gain.gain.setValueAtTime(0.06, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+          osc.connect(gain);
+          osc.start(now);
+          osc.stop(now + 0.08);
+        }
+      } catch (err) {
+        console.warn("Audio Context playback error:", err);
+      }
+    }
+
+    function getTodayDateString() {
+      const now = new Date();
+      const y = now.getFullYear();
+      const m = String(now.getMonth() + 1).padStart(2, '0');
+      const d = String(now.getDate()).padStart(2, '0');
+      return `${y}-${m}-${d}`;
+    }
+
+    function checkMidnightReset() {
+      const today = getTodayDateString();
+      if (!appState.lastDate) {
+        appState.lastDate = today;
+        return;
+      }
+
+      if (appState.lastDate !== today) {
+        // Midnight has passed
+        appState.todayCoins = 0; // Reset daily counter
+
+        const prev = new Date(appState.lastDate + "T00:00:00");
+        const cur = new Date(today + "T00:00:00");
+        const diffDays = Math.round((cur - prev) / (1000 * 60 * 60 * 24));
+
+        if (diffDays === 1) {
+          appState.streak = (appState.streak || 0) + 1;
+        } else if (diffDays > 1) {
+          appState.streak = 1;
+        }
+
+        appState.lastDate = today;
+        saveState();
+        showToast("Midnight reached! Daily earnings reset to 0. Streak updated!", "info");
+      }
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify(appState));
+      } catch (e) {
+        console.error("Local storage save error:", e);
+      }
+    }
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(CONFIG.STORAGE_KEY);
+        if (raw) {
+          appState = { ...appState, ...JSON.parse(raw) };
+        }
+      } catch (e) {
+        console.error("Local storage load error:", e);
+      }
+      checkMidnightReset();
+      saveState();
+    }
+
+    /**
+     * Executes the specific ad code based on slot definition.
+     * Guaranteed to run synchronously inside the user's click gesture context.
+     */
+    function triggerAdExecution(slot) {
+      if (slot.type === "direct_script") {
+        // Dynamic re-injection with timestamp bust to initiate network popunder/interstitial
+        try {
+          const s = document.createElement("script");
+          s.type = "text/javascript";
+          s.src = `${slot.scriptSrc}?ts=${Date.now()}`;
+          s.async = true;
+          document.body.appendChild(s);
+        } catch (e) {
+          console.warn("Direct script execution failed:", e);
+        }
+      } else if (slot.type === "iframe_banner") {
+        // Set atOptions on global window and trigger invoke script
+        try {
+          window.atOptions = {
+            'key': slot.key,
+            'format': 'iframe',
+            'height': 50,
+            'width': 320,
+            'params': {}
+          };
+          const s = document.createElement("script");
+          s.type = "text/javascript";
+          s.src = `${slot.invokeSrc}?ts=${Date.now()}`;
+          document.body.appendChild(s);
+
+          // Also populate the modal banner preview
+          populateModalBanner(slot);
+        } catch (e) {
+          console.warn("Iframe invoke execution failed:", e);
+        }
+      }
+    }
+
+    function populateModalBanner(slot) {
+      const host = document.getElementById("modalBannerHost");
+      host.style.display = "flex";
+      // Build safe sandboxed preview container with the ad scripts
+      host.innerHTML = `
+        <div style="width:320px; height:50px; overflow:hidden;">
+          <iframe 
+            srcdoc="<!DOCTYPE html><html><head><style>body{margin:0;padding:0;overflow:hidden;background:#000;display:flex;align-items:center;justify-content:center;}</style></head><body><script>var atOptions = {'key' : '${slot.key}','format' : 'iframe','height' : 50,'width' : 320,'params' : {}};\<\/script><script src='${slot.invokeSrc}'><\/script></body></html>" 
+            width="320" 
+            height="50" 
+            scrolling="no" 
+            frameborder="0">
+          </iframe>
+        </div>
+      `;
+    }
+
+    function renderApp() {
+      // 1. Metric values
+      document.getElementById("displayCoinsTop").textContent = Number(appState.coins).toLocaleString();
+      document.getElementById("valTotalCoins").textContent = Number(appState.coins).toLocaleString();
+      document.getElementById("valTodayCoins").textContent = Number(appState.todayCoins).toLocaleString();
+      document.getElementById("valTotalClicks").textContent = `${Number(appState.totalClicks).toLocaleString()} Clicks`;
+      document.getElementById("valStreakDays").textContent = `${appState.streak} ${appState.streak === 1 ? 'Day' : 'Days'}`;
+
+      // 2. Goal completion
+      const pct = Math.min(100, Math.round((appState.todayCoins / CONFIG.DAILY_GOAL) * 100));
+      document.getElementById("goalBarFill").style.width = `${pct}%`;
+      document.getElementById("valGoalPercent").textContent = `${pct}% Achieved`;
+      document.getElementById("valTargetGoal").textContent = CONFIG.DAILY_GOAL;
+      document.getElementById("statPerClickRate").textContent = `+${CONFIG.COINS_PER_CLICK}.00¢ / click`;
+      document.getElementById("cfgRewardPerAd").textContent = `${CONFIG.COINS_PER_CLICK} Coin`;
+      document.getElementById("cfgCooldownTime").textContent = `${CONFIG.SLOT_COOLDOWN_SECONDS}s`;
+
+      // 3. Audio toggle icons
+      document.getElementById("svgSoundOn").style.display = appState.soundEnabled ? "block" : "none";
+      document.getElementById("svgSoundOff").style.display = appState.soundEnabled ? "none" : "block";
+
+      // 4. Render 4 Ad Slots
+      renderAdDeck();
+
+      // 5. Render Activity Feed
+      renderActivityFeed();
+    }
+
+    function renderAdDeck() {
+      const container = document.getElementById("adsContainer");
+      const now = Date.now();
+
+      container.innerHTML = CONFIG.AD_SLOTS.map(slot => {
+        const cooldownExp = appState.cooldowns[slot.id] || 0;
+        const isCooldown = cooldownExp > now;
+        const secondsLeft = Math.ceil((cooldownExp - now) / 1000);
+
+        // Include the live 320x50 preview container for slot 3
+        const isSlot3 = slot.type === "iframe_banner";
+        const bannerPreview = isSlot3 ? `
+          <div class="banner-preview-box">
+            <span class="banner-preview-label">Live 320x50 Ad Display</span>
+            <div class="banner-iframe-wrap">
+              <iframe 
+                srcdoc="<!DOCTYPE html><html><head><style>body{margin:0;padding:0;overflow:hidden;background:transparent;display:flex;align-items:center;justify-content:center;}</style></head><body><script>var atOptions = {'key' : '${slot.key}','format' : 'iframe','height' : 50,'width' : 320,'params' : {}};\<\/script><script src='${slot.invokeSrc}'><\/script></body></html>" 
+                scrolling="no" 
+                frameborder="0">
+              </iframe>
+            </div>
+          </div>
+        ` : '';
+
+        return `
+          <div class="ad-slot-card" id="slotCard_${slot.id}">
+            <div>
+              <div class="slot-meta-header">
+                <span class="slot-pill">Slot 0${slot.id}</span>
+                <span class="reward-tag">+${CONFIG.COINS_PER_CLICK} Coin</span>
+              </div>
+              <div class="slot-graphic" style="background: ${slot.color}">
+                ${slot.icon}
+              </div>
+              <h3 class="slot-title">${slot.name}</h3>
+              <p class="slot-desc">${slot.desc}</p>
+              ${bannerPreview}
+            </div>
+
+            <button 
+              class="btn-engage-ad" 
+              id="slotBtn_${slot.id}"
+              ${isCooldown ? 'disabled' : ''} 
+              onclick="handleSlotClick(${slot.id})"
+            >
+              ${isCooldown 
+                ? `<span>Cooldown (${secondsLeft}s)</span>` 
+                : `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg><span>Launch & Earn</span>`
+              }
+            </button>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderActivityFeed() {
+      const listEl = document.getElementById("activityList");
+      const countEl = document.getElementById("valEventCount");
+
+      if (!appState.history || appState.history.length === 0) {
+        listEl.innerHTML = `<li style="text-align:center; color:var(--text-muted); padding:1.5rem; font-size:0.85rem;">No ad clicks logged yet. Click any of the 4 Ad Slots above to start earning!</li>`;
+        countEl.textContent = "0 events";
+        return;
+      }
+
+      countEl.textContent = `${appState.history.length} events`;
+      listEl.innerHTML = appState.history.slice(0, 10).map(item => `
+        <li class="activity-item">
+          <div>
+            <div style="font-weight:700; color:#fff;">${escapeHtml(item.slotName)}</div>
+            <div class="activity-item-time">${escapeHtml(item.time)}</div>
+          </div>
+          <div class="activity-item-gain">+${item.reward} ¢</div>
+        </li>
+      `).join('');
+    }
+
+    function handleSlotClick(slotId) {
+      playAudio('click');
+      const now = Date.now();
+      const cooldownExp = appState.cooldowns[slotId] || 0;
+      if (cooldownExp > now) {
+        showToast("Slot is currently cooling down. Try another slot!", "info");
+        return;
+      }
+
+      const slot = CONFIG.AD_SLOTS.find(s => s.id === slotId);
+      if (!slot) return;
+
+      activeSlotInModal = slot;
+
+      // 1. Synchronously trigger the real ad execution on trusted user gesture
+      triggerAdExecution(slot);
+
+      // 2. Open Verification countdown
+      openVerificationModal(slot);
+    }
+
+    function openVerificationModal(slot) {
+      const modal = document.getElementById("verifyModal");
+      const nameEl = document.getElementById("modalAdName");
+      const timerEl = document.getElementById("modalTimer");
+      const barFill = document.getElementById("modalBar");
+      const claimBtn = document.getElementById("btnClaimReward");
+      const bannerHost = document.getElementById("modalBannerHost");
+
+      nameEl.textContent = `Viewing ${slot.name}`;
+      claimBtn.disabled = true;
+      claimBtn.innerHTML = `<span>Verifying Impression...</span>`;
+      barFill.style.width = "0%";
+      
+      if (slot.type !== "iframe_banner") {
+        bannerHost.style.display = "none";
+        bannerHost.innerHTML = "";
+      }
+
+      modal.classList.add("active");
+
+      let remaining = CONFIG.VERIFICATION_SECONDS;
+      timerEl.textContent = remaining;
+
+      if (modalTimerInterval) clearInterval(modalTimerInterval);
+
+      modalTimerInterval = setInterval(() => {
+        remaining -= 1;
+        timerEl.textContent = Math.max(0, remaining);
+        const percent = ((CONFIG.VERIFICATION_SECONDS - remaining) / CONFIG.VERIFICATION_SECONDS) * 100;
+        barFill.style.width = `${percent}%`;
+
+        if (remaining <= 0) {
+          clearInterval(modalTimerInterval);
+          claimBtn.disabled = false;
+          claimBtn.innerHTML = `<span>Claim +${CONFIG.COINS_PER_CLICK} Coin ✓</span>`;
+          playAudio('coin');
+          claimBtn.onclick = confirmClaim;
+        }
+      }, 1000);
+    }
+
+    function confirmClaim() {
+      if (!activeSlotInModal) return;
+
+      checkMidnightReset();
+
+      const earned = CONFIG.COINS_PER_CLICK;
+      appState.coins += earned;
+      appState.todayCoins += earned;
+      appState.totalClicks += 1;
+
+      // Set individual slot cooldown
+      appState.cooldowns[activeSlotInModal.id] = Date.now() + (CONFIG.SLOT_COOLDOWN_SECONDS * 1000);
+
+      // Add activity entry
+      const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      appState.history.unshift({
+        id: Date.now(),
+        slotName: activeSlotInModal.name,
+        reward: earned,
+        time: timeStr
+      });
+
+      saveState();
+      renderApp();
+      closeVerificationModal();
+
+      // Confetti burst on claim
+      if (window.confetti) {
+        confetti({
+          particleCount: 65,
+          spread: 60,
+          origin: { y: 0.7 },
+          colors: ['#f59e0b', '#10b981', '#3b82f6']
+        });
+      }
+
+      // Visual coin pulse
+      const topPill = document.getElementById("topCoinPill");
+      topPill.classList.add("pulse");
+      setTimeout(() => topPill.classList.remove("pulse"), 450);
+
+      playAudio('coin');
+      showToast(`+${earned} Coin added from ${activeSlotInModal.name}!`, "success");
+      activeSlotInModal = null;
+    }
+
+    function closeVerificationModal() {
+      const modal = document.getElementById("verifyModal");
+      modal.classList.remove("active");
+      if (modalTimerInterval) clearInterval(modalTimerInterval);
+    }
+
+    function showToast(text, type = 'info') {
+      const host = document.getElementById("toast-host");
+      const toast = document.createElement("div");
+      toast.className = `toast-pill ${type}`;
+      toast.textContent = text;
+      host.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.transition = "all 0.3s ease";
+        toast.style.opacity = "0";
+        toast.style.transform = "translateY(12px)";
+        setTimeout(() => toast.remove(), 300);
+      }, 3600);
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/[&<>'"]/g, t => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        "'": '&#39;',
+        '"': '&quot;'
+      }[t] || t));
+    }
+
+    // Cooldown interval ticker updating button states every second
+    setInterval(() => {
+      const now = Date.now();
+      let hasCooldowns = false;
+
+      CONFIG.AD_SLOTS.forEach(slot => {
+        const exp = appState.cooldowns[slot.id] || 0;
+        if (exp > now) {
+          hasCooldowns = true;
+          const seconds = Math.ceil((exp - now) / 1000);
+          const btn = document.getElementById(`slotBtn_${slot.id}`);
+          if (btn) {
+            btn.disabled = true;
+            btn.innerHTML = `<span>Cooldown (${seconds}s)</span>`;
+          }
+        } else if (exp !== 0 && exp <= now) {
+          delete appState.cooldowns[slot.id];
+          const btn = document.getElementById(`slotBtn_${slot.id}`);
+          if (btn) {
+            btn.disabled = false;
+            btn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg><span>Launch & Earn</span>`;
+          }
+        }
+      });
+
+      if (hasCooldowns) saveState();
+    }, 1000);
+
+    // Midnight heartbeat checking date crossover every 30 seconds
+    setInterval(() => {
+      const prev = appState.todayCoins;
+      checkMidnightReset();
+      if (prev !== appState.todayCoins) {
+        renderApp();
+      }
+    }, 30000);
+
+    window.addEventListener("DOMContentLoaded", () => {
+      loadState();
+      renderApp();
+
+      // Audio toggle
+      document.getElementById("btnAudioToggle").addEventListener("click", () => {
+        appState.soundEnabled = !appState.soundEnabled;
+        saveState();
+        renderApp();
+        if (appState.soundEnabled) playAudio('coin');
+      });
+
+      // Clear cache & storage
+      document.getElementById("btnResetStorage").addEventListener("click", () => {
+        localStorage.removeItem(CONFIG.STORAGE_KEY);
+        appState = {
+          coins: 0,
+          todayCoins: 0,
+          totalClicks: 0,
+          streak: 1,
+          lastDate: getTodayDateString(),
+          soundEnabled: true,
+          cooldowns: {},
+          history: []
+        };
+        saveState();
+        renderApp();
+        showToast("Local storage and coin balance reset.", "info");
+      });
+    });
+  </script>
+</body>
+</html>
